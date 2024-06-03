@@ -34,7 +34,7 @@ describe(PokemonFinder, () => {
     expect(image).toHaveAttribute("alt", "pikachu");
   });
 
-  test("存在しないポケモンIDを入力した場合にデフォルト値が表示される。", async () => {
+  test("データの取得中にエラーが発生した場合に適切なエラーメッセージが表示される。", async () => {
     render(<PokemonFinder />);
 
     // 存在しないポケモンのIDを入力
@@ -45,11 +45,8 @@ describe(PokemonFinder, () => {
     const buttonElement = screen.getByRole("button");
     await user.click(buttonElement);
 
-    // デフォルトポケモンデータが表示されるのを待つ
-    const pokemonName = screen.getByText("unknown");
-    expect(pokemonName).toBeInTheDocument();
-    const image = screen.getByRole("img");
-    expect(image).toHaveAttribute("src", "http://example.com/default.png");
-    expect(image).toHaveAttribute("alt", "unknown");
+    expect(
+      await screen.findByText("ポケモンのデータが見つかりません。")
+    ).toBeInTheDocument();
   });
 });

@@ -18,25 +18,29 @@ const pokemons: Record<string, PokemonData | undefined> = {
     name: "pikachu",
     sprites: { front_default: "http://example.com/pikachu.png" },
   },
-  default: {
-    name: "unknown",
-    sprites: { front_default: "http://example.com/default.png" },
-  },
 };
 
 export const handlers = [
-  http.get("https://pokeapi.co/api/v2/pokemon/:id", async ({ params }) => {
-    const id = Array.isArray(params.id) ? params.id[0] : params.id;
+  http.get(
+    "https://pokeapi.co/api/v2/pokemon/:id",
+    async ({ params }: { params: { id: string } }) => {
+      const id = params.id;
 
-    // 安全にインデックスを付けるために型が定義されたオブジェクトを使用
-    const pokemonData = pokemons[id] || pokemons["default"];
-
-    return HttpResponse.json(
-      {
-        id,
-        ...pokemonData,
-      },
-      { status: 200 }
-    );
-  }),
+      // 安全にインデックスを付けるために型が定義されたオブジェクトを使用
+      const pokemonData = pokemons[id];
+      // ポケモンデータが存在する場合
+      if (pokemonData) {
+        return HttpResponse.json(
+          {
+            id,
+            ...pokemonData,
+          },
+          { status: 200 }
+        );
+      } else {
+        // ポケモンデータが存在しない場合は404エラーを返す
+        return HttpResponse.json({ message: "Not Found" }, { status: 404 });
+      }
+    }
+  ),
 ];
