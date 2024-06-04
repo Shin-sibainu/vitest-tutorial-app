@@ -1,0 +1,10 @@
+1. npm i -D vitest @vitest/coverage-v8 @vitest/ui
+2. npm i -D @testing-library/jest-dom @testing-library/react @testing-library/user-event
+3. vite.config.ts mod 
+4. package.json mod
+5. src/test/setup.ts create 
+6. tsconfig.json mod 
+7. src/test/PokemonFinder.test.tsx 
+8. api mock(test env cant connect api)
+9. npm i -D msw 
+10. src/test/mocks/handlers.ts

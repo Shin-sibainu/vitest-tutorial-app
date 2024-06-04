@@ -37,7 +37,6 @@ describe(PokemonFinder, () => {
   test("データの取得中にエラーが発生した場合に適切なエラーメッセージが表示される。", async () => {
     render(<PokemonFinder />);
 
-    // 存在しないポケモンのIDを入力
     const input = screen.getByPlaceholderText("ポケモンのIDを入力");
     const user = userEvent.setup();
     await user.type(input, "999");
