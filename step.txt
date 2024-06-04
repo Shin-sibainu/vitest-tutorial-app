@@ -8,3 +8,7 @@
 8. api mock(test env cant connect api)
 9. npm i -D msw 
 10. src/test/mocks/handlers.ts
+11. src/test/server.ts 
+12. src/test/setup.ts mod
+13. mock api test
+14. test:ui, coverage
